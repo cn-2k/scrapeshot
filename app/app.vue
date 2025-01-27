@@ -84,6 +84,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 
+
+useHead({
+  title: 'ScrapeShot'
+})
+
 const form = reactive({
   pageUrl: '',
   width: 1920,

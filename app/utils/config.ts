@@ -12,19 +12,19 @@ export const connectBrowser = async (url: string) => {
 
   const executablePath = await chromium.executablePath(CHROMIUM_PATH);
 
-  // const browser = await puppeteerCore.launch({
-  //   args: chromium.args,
-  //   defaultViewport: chromium.defaultViewport,
-  //   executablePath,
-  //   headless: chromium.headless,
-  //   acceptInsecureCerts: true
-  // });
-
   const browser = await puppeteerCore.launch({
-    browser: 'chrome',
-    headless: true,
-    channel: 'chrome'
+    args: [...chromium.args],
+    defaultViewport: chromium.defaultViewport,
+    executablePath,
+    headless: chromium.headless,
+    acceptInsecureCerts: true,
   })
+
+  // const browser = await puppeteerCore.launch({
+  //   browser: 'chrome',
+  //   headless: true,
+  //   channel: 'chrome'
+  // })
 
   const page = await browser.newPage();
 
