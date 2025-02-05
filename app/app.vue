@@ -103,19 +103,32 @@ const getPageScreenshot = async () => {
   try {
     screenshotUrl.value = ''
     isLoading.value = true
+    console.log(form);
+
+    // Criar um novo objeto excluindo width e height se forem vazios ou inválidos
+    const requestBody: Record<string, any> = { 
+      pageUrl: form.pageUrl, 
+      fullPage: form.fullPage 
+    };
+
+    if (form.width) requestBody.width = form.width;
+    if (form.height) requestBody.height = form.height;
+
     const response = await $fetch('/api/analyse/screenshot', {
       method: 'POST',
-      body: form,
+      body: requestBody, // Enviando apenas os valores necessários
       headers: {
         'Content-Type': 'application/json'
       },
-    })
+    });
 
-    screenshotUrl.value = response.screenshotBase64
-    isLoading.value = false
+    screenshotUrl.value = response.screenshotBase64;
+    isLoading.value = false;
+    
   } catch (error) {
-    isLoading.value = false
-    console.error(error)
+    isLoading.value = false;
+    console.error(error);
   }
 }
+
 </script>

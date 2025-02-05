@@ -2,7 +2,7 @@ import puppeteerCore from "puppeteer-core";
 import chromium from "@sparticuz/chromium-min"
 // import chromium from "@sparticuz/chromium";
 
-const DEFAULT_PAGE_TIMEOUT_MS = 60000;
+const DEFAULT_PAGE_TIMEOUT_MS = 90000;
 const CHROMIUM_PATH =
   "https://vomrghiulbmrfvmhlflk.supabase.co/storage/v1/object/public/chromium-pack/chromium-v123.0.0-pack.tar";
 
@@ -31,7 +31,7 @@ export const connectBrowser = async (url: string) => {
   page.setDefaultTimeout(DEFAULT_PAGE_TIMEOUT_MS);
 
   await page.goto(url, {
-    waitUntil: 'domcontentloaded',
+    waitUntil: 'networkidle2',
     timeout: DEFAULT_PAGE_TIMEOUT_MS,
   });
 

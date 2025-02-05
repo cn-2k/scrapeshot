@@ -15,8 +15,6 @@ export default defineEventHandler(async (event) => {
   const { page } = await connectBrowser(pageUrl);
 
   try {
-    await page.goto(pageUrl, { waitUntil: 'networkidle2', timeout: 30000 });
-
     if (width && height) {
       await page.setViewport({
         width,
@@ -31,6 +29,9 @@ export default defineEventHandler(async (event) => {
     return {
       success: true,
       url: pageUrl,
+      fullPage: fullPage,
+      width: width,
+      height: height,
       screenshotBase64: `data:image/png;base64,${screenshotBase64}`,
     };
 
